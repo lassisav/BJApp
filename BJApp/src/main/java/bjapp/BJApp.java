@@ -5,6 +5,8 @@
 
 package bjapp;
 
+import bjapp.textGame.TextGame;
+
 /**
  *
  * @author lassisav
@@ -12,6 +14,6 @@ package bjapp;
 public class BJApp {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        TextGame.textGame();
     }
 }
