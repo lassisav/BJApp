@@ -46,7 +46,7 @@ public class HandTest {
     }
     
     @Test
-    public void firsCardCorrectAce(){
+    public void firstCardCorrectAce(){
         String value = playerHand.addCard(1);
         assertEquals("1/11", value);
     }
