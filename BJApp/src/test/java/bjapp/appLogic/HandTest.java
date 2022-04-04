@@ -4,10 +4,10 @@
  */
 package bjapp.appLogic;
 
+//import org.junit.AfterClass;
+//import org.junit.BeforeClass;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -44,9 +44,10 @@ public class HandTest {
         String value = playerHand.addCard(7);
         assertEquals("7", value);
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+    @Test
+    public void firsCardCorrectAce(){
+        String value = playerHand.addCard(1);
+        assertEquals("1/11", value);
+    }
 }
