@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
+ * This is the main class of the application.
+ * This class begins the execution of the appropriate class. TextGame for now, GUI when it is added.
  */
 
 package bjapp;
@@ -9,7 +9,7 @@ import bjapp.textGame.TextGame;
 
 /**
  *
- * @author lassisav
+ * @author Lassi Savolainen, student, Universit of Helsinki
  */
 public class BJApp {
 
