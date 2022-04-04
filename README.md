@@ -2,7 +2,9 @@
 
 ***Lassi Savolainen***
 
-Black Jack -sovellus
+**Black Jack -sovellus**
+
+Sovelluksessa pelataan Blackjack-kasinopeliä suomalaisten pelikasinoiden säännöillä.
 
 ### Dokumentaatio
 
