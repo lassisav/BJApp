@@ -19,11 +19,15 @@ import java.util.Scanner;
  * @author Lassi Savolainen, student, University of Helsinki
  */
 public class TextGame {
+    
+    static Hand dealerHand;
+    static Hand playerHand;
+    
     public static void textGame() {
         System.out.println("This is the text based game version.");
         Scanner scanner = new Scanner(System.in);
-        Hand dealerHand = new Hand(true);
-        Hand playerHand = new Hand(false);
+        dealerHand = new Hand(true);
+        playerHand = new Hand(false);
         String temp;
         boolean moreCards;
         boolean dealerHits;
@@ -31,11 +35,7 @@ public class TextGame {
         while (playing) {
             System.out.println("Press ENTER to start.");
             temp = scanner.nextLine();
-            //The following lines will be changed to game operations, as game operations are created
-            //Base deal
-            playerHand.addRandomCard();
-            dealerHand.addRandomCard();
-            playerHand.addRandomCard();
+            baseDeal();
             //Additional cards
             moreCards = true;
             dealerHits = true;
@@ -101,5 +101,11 @@ public class TextGame {
                 }
             }
         }
+    }
+    
+    public static void baseDeal(){
+        playerHand.addRandomCard();
+        dealerHand.addRandomCard();
+        playerHand.addRandomCard();
     }
 }
