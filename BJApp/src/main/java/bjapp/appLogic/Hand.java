@@ -23,12 +23,15 @@ public class Hand {
     }
     public String addCard(int card){
         if (isDealer) {
-            System.out.println("Dealer draws " + card);
+            System.out.print("Dealer draws ");
         } else {
-            System.out.println("You draw " + card);
+            System.out.print("You draw ");
         }
         if (card == 1) {
             hasAce = true;
+            System.out.println("Ace");
+        } else {
+            System.out.println(card);
         }
         value += card;
         return getValueString();
