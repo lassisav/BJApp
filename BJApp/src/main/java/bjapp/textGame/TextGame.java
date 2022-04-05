@@ -22,90 +22,95 @@ public class TextGame {
     
     static Hand dealerHand;
     static Hand playerHand;
+    static boolean moreCards;
+    static boolean dealerHits;
+    static Scanner scanner;
+    static String temp;
     
     public static void textGame() {
         System.out.println("This is the text based game version.");
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         dealerHand = new Hand(true);
         playerHand = new Hand(false);
-        String temp;
-        boolean moreCards;
-        boolean dealerHits;
         boolean playing = true;
         while (playing) {
             System.out.println("Press ENTER to start.");
             temp = scanner.nextLine();
             baseDeal();
-            //Additional cards
-            moreCards = true;
-            dealerHits = true;
-            while (moreCards) {                
-                System.out.println("Dealer has " + dealerHand.getValueString());
-                System.out.println("You have " + playerHand.getValueString());
-                System.out.println("Type HIT or STAND");
-                temp = scanner.nextLine();
-                if (temp.equals("HIT")) {
-                    System.out.println("You choose to HIT!");
-                    temp = playerHand.addRandomCard();
-                    if (temp.endsWith("bust!")) {
-                        System.out.println("You have " + temp);
-                        System.out.println("Dealer wins!");
-                        dealerHits = false;
-                        moreCards = false;
-                    } else {
-                        System.out.println("You have " + temp);
-                    }
-                } else if (temp.equals("STAND")) {
-                    System.out.println("You choose to STAND!");
+            playerTurn();
+            dealerTurn();
+            playing = newGame();
+        }
+    }
+    
+    public static void baseDeal() {
+        playerHand.addRandomCard();
+        dealerHand.addRandomCard();
+        playerHand.addRandomCard();
+    }
+    public static void playerTurn() {
+        moreCards = true;
+        dealerHits = true;
+        while (moreCards) {                
+            System.out.println("Dealer has " + dealerHand.getValueString());
+            System.out.println("You have " + playerHand.getValueString());
+            System.out.println("Type HIT or STAND");
+            temp = scanner.nextLine();
+            if (temp.equals("HIT")) {
+                System.out.println("You choose to HIT!");
+                temp = playerHand.addRandomCard();
+                if (temp.endsWith("bust!")) {
+                    System.out.println("You have " + temp);
+                    System.out.println("Dealer wins!");
+                    dealerHits = false;
                     moreCards = false;
                 } else {
-                    System.out.println("Invalid input, please type HIT or STAND");
+                    System.out.println("You have " + temp);
                 }
+            } else if (temp.equals("STAND")) {
+                System.out.println("You choose to STAND!");
+                moreCards = false;
+            } else {
+                System.out.println("Invalid input, please type HIT or STAND");
             }
-            //Dealer takes cards
-            System.out.println("Dealer takes cards!");
-            while (dealerHits) {
-                temp = dealerHand.addRandomCard();
-                if (temp.endsWith("bust!")) {
-                    System.out.println("Dealer has " + temp);
-                    System.out.println("You win!");
-                    dealerHits = false;
-                } else {
-                    dealerHits = dealerHand.dealerHitCheck();
-                    if (!dealerHits) {
-                        int winner = dealerHand.dealerWinCheck(playerHand);
-                        if (winner == 1) {
-                            System.out.println("Dealer wins!");
-                        } else if (winner == -1) {
-                            System.out.println("You win!");
-                        } else {
-                            System.out.println("Push!");
-                        }
+        }
+    }
+    public static void dealerTurn() {
+        System.out.println("Dealer takes cards!");
+        while (dealerHits) {
+            temp = dealerHand.addRandomCard();
+            if (temp.endsWith("bust!")) {
+                System.out.println("Dealer has " + temp);
+                System.out.println("You win!");
+                dealerHits = false;
+            } else {
+                dealerHits = dealerHand.dealerHitCheck();
+                if (!dealerHits) {
+                    int winner = dealerHand.dealerWinCheck(playerHand);
+                    if (winner == 1) {
+                        System.out.println("Dealer wins!");
+                    } else if (winner == -1) {
+                        System.out.println("You win!");
+                    } else {
+                        System.out.println("Push!");
                     }
-                }
-            }
-            //End
-            System.out.println("Type QUIT to quit playing, or NEW to play a new game.");
-            boolean newGameLoop = true;
-            while(newGameLoop){
-                temp = scanner.nextLine();
-                if (temp.equals("QUIT")) {
-                    playing = false;
-                    newGameLoop = false;
-                } else if (temp.equals("NEW")) {
-                    playerHand.resetHand();
-                    dealerHand.resetHand();
-                    newGameLoop = false;
-                } else {
-                    System.out.println("Invalid input, please type QUIT or NEW.");
                 }
             }
         }
     }
-    
-    public static void baseDeal(){
-        playerHand.addRandomCard();
-        dealerHand.addRandomCard();
-        playerHand.addRandomCard();
+    public static boolean newGame() {
+    System.out.println("Type QUIT to quit playing, or NEW to play a new game.");
+            while(true){
+                temp = scanner.nextLine();
+                if (temp.equals("QUIT")) {
+                    return false;
+                } else if (temp.equals("NEW")) {
+                    playerHand.resetHand();
+                    dealerHand.resetHand();
+                    return true;
+                } else {
+                    System.out.println("Invalid input, please type QUIT or NEW.");
+                }
+            }
     }
 }
