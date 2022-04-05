@@ -38,7 +38,9 @@ public class TextGame {
             temp = scanner.nextLine();
             baseDeal();
             playerTurn();
-            dealerTurn();
+            if (dealerHits) {
+                dealerTurn();
+            }
             playing = newGame();
         }
     }
@@ -57,16 +59,7 @@ public class TextGame {
             System.out.println("Type HIT or STAND");
             temp = scanner.nextLine();
             if (temp.equals("HIT")) {
-                System.out.println("You choose to HIT!");
-                temp = playerHand.addRandomCard();
-                if (temp.endsWith("bust!")) {
-                    System.out.println("You have " + temp);
-                    System.out.println("Dealer wins!");
-                    dealerHits = false;
-                    moreCards = false;
-                } else {
-                    System.out.println("You have " + temp);
-                }
+                playerHit();
             } else if (temp.equals("STAND")) {
                 System.out.println("You choose to STAND!");
                 moreCards = false;
@@ -112,5 +105,17 @@ public class TextGame {
                     System.out.println("Invalid input, please type QUIT or NEW.");
                 }
             }
+    }
+    public static void playerHit() {
+        System.out.println("You choose to HIT!");
+        temp = playerHand.addRandomCard();
+        if (temp.endsWith("bust!")) {
+            System.out.println("You have " + temp);
+            System.out.println("Dealer wins!");
+            dealerHits = false;
+            moreCards = false;
+        } else {
+            System.out.println("You have " + temp);
+        }
     }
 }
