@@ -74,8 +74,8 @@ public class Hand {
             dealerTrue += 10;
         }
         int playerTrue = playerHand.getValue();
-        if (hasAce && playerTrue < 12) {
-            dealerTrue += 10;
+        if (playerHand.hasAce && playerTrue < 12) {
+            playerTrue += 10;
         }
         System.out.println("Dealer has " + dealerTrue + "!");
         System.out.println("You have " + playerTrue + "!");
