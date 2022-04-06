@@ -10,3 +10,4 @@
 |       | 1    | Ensimmäiset testit |
 |       | 1    | Rakenteen suunnittelua |
 |  5.4. | 1    | Koodin pilkkomista erillisiin metodeihin |
+|  6.4. | 1    | Hand-luokan testit |
