@@ -3,7 +3,6 @@
  * Game logic for modifying and comparing the dealer's and player's hands is in the Hand-class.
  * Game logic for moving from one phase of the game to another is in this class.
  * Known problems:
- * Game does not currently contain the concept of a Blackjack. (Not yet implemented)
  * Game does not currently contain special actions (Double down, split, insurance, surrender). (Not yet implemented).
  */
 package bjapp.textGame;
@@ -25,6 +24,7 @@ public class TextGame {
     static String temp;
     static int playerCash;
     static int betSize;
+    static int playerBJ; // 0 = no blackjack, 1 = blackjack, dealer 10 or Ace, 2 = blackjack, straight win
     
     public static void textGame() {
         System.out.println("This is the text based game version.");
@@ -38,7 +38,9 @@ public class TextGame {
             temp = scanner.nextLine();
             betSelection();
             baseDeal();
-            playerTurn();
+            if (playerBJ == 0) {
+                playerTurn();  
+            }
             if (dealerHits) {
                 dealerTurn();
             }
@@ -66,6 +68,19 @@ public class TextGame {
         playerHand.addRandomCard();
         dealerHand.addRandomCard();
         playerHand.addRandomCard();
+        if (playerHand.getValueString().equals("11/21")) {
+            if (!(dealerHand.getValueString().equals("10") || dealerHand.getValueString().equals("1/11"))) {
+                System.out.println("You have a BLACKJACK! You win " + (betSize*3/2));
+                playerBJ = 2;
+                dealerHits = false;
+                playerCash += betSize*3/2;
+            } else {
+                System.out.println("You have a BLACKJACK!");
+                playerBJ = 1;
+            }
+        } else {
+            playerBJ = 0;
+        }
     }
     public static void playerTurn() {
         moreCards = true;
@@ -87,8 +102,24 @@ public class TextGame {
     }
     public static void dealerTurn() {
         System.out.println("Dealer takes cards!");
+        boolean dealerBJ = false;
+        if (dealerHand.getValueString().equals("10") || dealerHand.getValueString().equals("1/11")) {
+            dealerBJ = true;
+        }
         while (dealerHits) {
             temp = dealerHand.addRandomCard();
+            if (dealerBJ && dealerHand.getValueString().equals("11/21")) {
+                System.out.println("Dealer has BLACKJACK!");
+                if (playerBJ == 1) {
+                    System.out.println("Push!");
+                } else {
+                    System.out.println("Dealer wins! You lose " + betSize + "€!");
+                    playerCash -= betSize;
+                }
+                break;
+            } else {
+                dealerBJ = false;
+            }
             if (temp.endsWith("bust!")) {
                 System.out.println("Dealer has " + temp);
                 System.out.println("You win " + betSize + "€!");
