@@ -145,20 +145,7 @@ public class TextGame {
     public static boolean newGame() {
         System.out.println("You have " + playerCash + "€ left.");
         if (playerCash == 0) {
-            System.out.println("Type MORE to add 1000€ and play a new game, or QUIT to quit playing.");
-            while (true) {
-                temp = scanner.nextLine();
-                if (temp.equals("QUIT")) {
-                    return false;
-                } else if (temp.equals("MORE")) {
-                    playerCash = 1000;
-                    playerHand.resetHand();
-                    dealerHand.resetHand();
-                    return true;
-                } else {
-                    System.out.println("Invalid input, please type MORE or QUIT.");
-                }
-            }
+            return outOfMoney();
         }
         System.out.println("Type QUIT to quit playing, or NEW to play a new game.");
         while (true) {
@@ -171,6 +158,22 @@ public class TextGame {
                 return true;
             } else {
                 System.out.println("Invalid input, please type QUIT or NEW.");
+            }
+        }
+    }
+    public static boolean outOfMoney() {
+        System.out.println("Type MORE to add 1000€ and play a new game, or QUIT to quit playing.");
+        while (true) {
+            temp = scanner.nextLine();
+            if (temp.equals("QUIT")) {
+                return false;
+            } else if (temp.equals("MORE")) {
+                playerCash = 1000;
+                playerHand.resetHand();
+                dealerHand.resetHand();
+                return true;
+            } else {
+                System.out.println("Invalid input, please type MORE or QUIT.");
             }
         }
     }
