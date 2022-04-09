@@ -11,3 +11,7 @@
 |       | 1    | Rakenteen suunnittelua |
 |  5.4. | 1    | Koodin pilkkomista erillisiin metodeihin |
 |  6.4. | 1    | Hand-luokan testit |
+|  9.4. | 2    | Blackjack:n konsepti ja panostaminen |
+|       |      | Jar ja checkstyle |
+|       |      |  |
+|  Yht. | 15   |  |
