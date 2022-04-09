@@ -5,6 +5,7 @@ package bjapp.appLogic;
 
 //import org.junit.AfterClass;
 //import org.junit.BeforeClass;
+import bjapp.applogic.Hand;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

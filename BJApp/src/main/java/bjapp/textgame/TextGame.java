@@ -5,9 +5,9 @@
  * Known problems:
  * Game does not currently contain special actions (Double down, split, insurance, surrender). (Not yet implemented).
  */
-package bjapp.textGame;
+package bjapp.textgame;
 
-import bjapp.appLogic.Hand;
+import bjapp.applogic.Hand;
 import java.util.Scanner;
 
 /**
@@ -47,7 +47,7 @@ public class TextGame {
             playing = newGame();
         }
     }
-    public static void betSelection(){
+    public static void betSelection() {
         System.out.println("You have " + playerCash + "€ left. Type your betsize (1-" + playerCash + ").");
         while (true) {            
             temp = scanner.nextLine();
@@ -70,10 +70,10 @@ public class TextGame {
         playerHand.addRandomCard();
         if (playerHand.getValueString().equals("11/21")) {
             if (!(dealerHand.getValueString().equals("10") || dealerHand.getValueString().equals("1/11"))) {
-                System.out.println("You have a BLACKJACK! You win " + (betSize*3/2));
+                System.out.println("You have a BLACKJACK! You win " + (betSize * 3 / 2));
                 playerBJ = 2;
                 dealerHits = false;
-                playerCash += betSize*3/2;
+                playerCash += betSize * 3 / 2;
             } else {
                 System.out.println("You have a BLACKJACK!");
                 playerBJ = 1;
@@ -146,7 +146,7 @@ public class TextGame {
         System.out.println("You have " + playerCash + "€ left.");
         if (playerCash == 0) {
             System.out.println("Type MORE to add 1000€ and play a new game, or QUIT to quit playing.");
-            while(true) {
+            while (true) {
                 temp = scanner.nextLine();
                 if (temp.equals("QUIT")) {
                     return false;
@@ -161,18 +161,18 @@ public class TextGame {
             }
         }
         System.out.println("Type QUIT to quit playing, or NEW to play a new game.");
-            while(true){
-                temp = scanner.nextLine();
-                if (temp.equals("QUIT")) {
-                    return false;
-                } else if (temp.equals("NEW")) {
-                    playerHand.resetHand();
-                    dealerHand.resetHand();
-                    return true;
-                } else {
-                    System.out.println("Invalid input, please type QUIT or NEW.");
-                }
+        while (true) {
+            temp = scanner.nextLine();
+            if (temp.equals("QUIT")) {
+                return false;
+            } else if (temp.equals("NEW")) {
+                playerHand.resetHand();
+                dealerHand.resetHand();
+                return true;
+            } else {
+                System.out.println("Invalid input, please type QUIT or NEW.");
             }
+        }
     }
     public static void playerHit() {
         System.out.println("You choose to HIT!");

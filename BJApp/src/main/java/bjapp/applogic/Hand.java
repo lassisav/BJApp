@@ -2,7 +2,7 @@
  * This class is used to represent a hand. The hand can be a dealer's hand, or a player's hand.
  * Methods in this class are used to modify and compare the state of a hand during the game.
  */
-package bjapp.appLogic;
+package bjapp.applogic;
 
 /**
  *
@@ -12,16 +12,16 @@ public class Hand {
     int value;
     boolean hasAce;
     boolean isDealer;
-    public Hand(boolean status){
+    public Hand(boolean status) {
         value = 0;
         hasAce = false;
         isDealer = status;
     }
-    public void resetHand(){
+    public void resetHand() {
         value = 0;
         hasAce = false;
     }
-    public String addCard(int card){
+    public String addCard(int card) {
         if (isDealer) {
             System.out.print("Dealer draws ");
         } else {
@@ -36,31 +36,31 @@ public class Hand {
         value += card;
         return getValueString();
     }
-    public String addRandomCard(){
+    public String addRandomCard() {
         return this.addCard(randomCardValue());
     }
-    public int randomCardValue(){
-        int card = 1 + (int)(Math.random()*13);
-        if (card>9) {
+    public int randomCardValue() {
+        int card = 1 + (int) (Math.random() * 13);
+        if (card > 9) {
             return 10;
         }
         return card;
     }
-    public String getValueString(){
+    public String getValueString() {
         if (value > 21) {
             return String.valueOf(value) +  ", bust!";
-        } else if (hasAce && value<12) {
-            String temp = String.valueOf(value) + "/" + String.valueOf(value+10);
+        } else if (hasAce && value < 12) {
+            String temp = String.valueOf(value) + "/" + String.valueOf(value + 10);
             return temp;
         } else {
             return String.valueOf(value);
         }
     }
-    public int getValue(){
+    public int getValue() {
         return value;
     }
-    public boolean dealerHitCheck(){
-        if (value>16) {
+    public boolean dealerHitCheck() {
+        if (value > 16) {
             return false;
         }
         if (hasAce && value > 6 && value < 12) {
@@ -68,7 +68,7 @@ public class Hand {
         }
         return true;
     }
-    public int dealerWinCheck (Hand playerHand) {
+    public int dealerWinCheck(Hand playerHand) {
         int dealerTrue = value;
         if (hasAce && dealerTrue < 12) {
             dealerTrue += 10;

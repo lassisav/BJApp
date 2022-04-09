@@ -5,7 +5,7 @@
 
 package bjapp;
 
-import bjapp.textGame.TextGame;
+import bjapp.textgame.TextGame;
 
 /**
  *
