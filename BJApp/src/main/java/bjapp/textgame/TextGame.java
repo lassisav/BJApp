@@ -27,15 +27,14 @@ public class TextGame {
     static int playerBJ; // 0 = no blackjack, 1 = blackjack, dealer 10 or Ace, 2 = blackjack, straight win
     
     public static void textGame() {
-        System.out.println("This is the text based game version.");
+        System.out.println("This is the text based game version.\nPress ENTER to start.");
         scanner = new Scanner(System.in);
+        temp = scanner.nextLine();
         dealerHand = new Hand(true);
         playerHand = new Hand(false);
         playerCash = 1000;
         boolean playing = true;
         while (playing) {
-            System.out.println("Press ENTER to start.");
-            temp = scanner.nextLine();
             betSelection();
             baseDeal();
             if (playerBJ == 0) {
@@ -65,6 +64,7 @@ public class TextGame {
         }
     }
     public static void baseDeal() {
+        dealerHits = true;
         playerHand.addRandomCard();
         dealerHand.addRandomCard();
         playerHand.addRandomCard();
