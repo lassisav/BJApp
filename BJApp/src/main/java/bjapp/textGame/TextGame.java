@@ -26,16 +26,20 @@ public class TextGame {
     static boolean dealerHits;
     static Scanner scanner;
     static String temp;
+    static int playerCash;
+    static int betSize;
     
     public static void textGame() {
         System.out.println("This is the text based game version.");
         scanner = new Scanner(System.in);
         dealerHand = new Hand(true);
         playerHand = new Hand(false);
+        playerCash = 1000;
         boolean playing = true;
         while (playing) {
             System.out.println("Press ENTER to start.");
             temp = scanner.nextLine();
+            betSelection();
             baseDeal();
             playerTurn();
             if (dealerHits) {
@@ -44,7 +48,23 @@ public class TextGame {
             playing = newGame();
         }
     }
-    
+    public static void betSelection(){
+        System.out.println("You have " + playerCash + "€ left. Type your betsize (1-" + playerCash + ").");
+        while (true) {            
+            temp = scanner.nextLine();
+            try {
+                betSize = Integer.parseInt(temp);
+                if (betSize < 0 || betSize > playerCash) {
+                    System.out.println("Please input a valid integer (1-" + playerCash + ").");
+                } else {
+                    System.out.println("You bet " + betSize + "€!");
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a valid integer (1-" + playerCash + ").");
+            }
+        }
+    }
     public static void baseDeal() {
         playerHand.addRandomCard();
         dealerHand.addRandomCard();
@@ -74,16 +94,19 @@ public class TextGame {
             temp = dealerHand.addRandomCard();
             if (temp.endsWith("bust!")) {
                 System.out.println("Dealer has " + temp);
-                System.out.println("You win!");
+                System.out.println("You win " + betSize + "€!");
+                playerCash += betSize;
                 dealerHits = false;
             } else {
                 dealerHits = dealerHand.dealerHitCheck();
                 if (!dealerHits) {
                     int winner = dealerHand.dealerWinCheck(playerHand);
                     if (winner == 1) {
-                        System.out.println("Dealer wins!");
+                        System.out.println("Dealer wins! You lose " + betSize + "€!");
+                        playerCash -= betSize;
                     } else if (winner == -1) {
-                        System.out.println("You win!");
+                        System.out.println("You win " + betSize + "€!");
+                        playerCash += betSize;
                     } else {
                         System.out.println("Push!");
                     }
@@ -92,7 +115,24 @@ public class TextGame {
         }
     }
     public static boolean newGame() {
-    System.out.println("Type QUIT to quit playing, or NEW to play a new game.");
+        System.out.println("You have " + playerCash + "€ left.");
+        if (playerCash == 0) {
+            System.out.println("Type MORE to add 1000€ and play a new game, or QUIT to quit playing.");
+            while(true) {
+                temp = scanner.nextLine();
+                if (temp.equals("QUIT")) {
+                    return false;
+                } else if (temp.equals("MORE")) {
+                    playerCash = 1000;
+                    playerHand.resetHand();
+                    dealerHand.resetHand();
+                    return true;
+                } else {
+                    System.out.println("Invalid input, please type MORE or QUIT.");
+                }
+            }
+        }
+        System.out.println("Type QUIT to quit playing, or NEW to play a new game.");
             while(true){
                 temp = scanner.nextLine();
                 if (temp.equals("QUIT")) {
@@ -111,7 +151,8 @@ public class TextGame {
         temp = playerHand.addRandomCard();
         if (temp.endsWith("bust!")) {
             System.out.println("You have " + temp);
-            System.out.println("Dealer wins!");
+            System.out.println("Dealer wins! You lose " + betSize + "€!");
+            playerCash -= betSize;
             dealerHits = false;
             moreCards = false;
         } else {
