@@ -4,10 +4,7 @@
  * Game logic for moving from one phase of the game to another is in this class.
  * Known problems:
  * Game does not currently contain the concept of a Blackjack. (Not yet implemented)
- * Game does not currently contain the concept of betting. (Not yet implemented)
  * Game does not currently contain special actions (Double down, split, insurance, surrender). (Not yet implemented).
- * Central game logic is built into a single method, so it is not possible to unit test the transition from one game phase to another.
- * Instead, directions given to the game by methods in the Hand-class can be unit tested to measure accuracy.
  */
 package bjapp.textGame;
 

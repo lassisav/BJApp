@@ -9,7 +9,7 @@ import bjapp.textGame.TextGame;
 
 /**
  *
- * @author Lassi Savolainen, student, Universit of Helsinki
+ * @author Lassi Savolainen, student, University of Helsinki
  */
 public class BJApp {
 
