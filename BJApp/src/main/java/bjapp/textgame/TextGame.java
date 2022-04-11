@@ -7,6 +7,7 @@
  */
 package bjapp.textgame;
 
+import bjapp.applogic.Game;
 import bjapp.applogic.Hand;
 import java.util.Scanner;
 
@@ -20,19 +21,22 @@ public class TextGame {
     static Hand playerHand;
     static boolean moreCards;
     static boolean dealerHits;
+    static boolean playing;
     static Scanner scanner;
     static String temp;
     static int playerCash;
     static int betSize;
     static int playerBJ; // 0 = no blackjack, 1 = blackjack, dealer 10 or Ace, 2 = blackjack, straight win
     static int insurance;
+    static public Game game;
     
-    public static void textGame() {
+/*  public static void textGame() {
         System.out.println("This is the text based game version.\nPress ENTER to start.");
         scanner = new Scanner(System.in);
         temp = scanner.nextLine();
         dealerHand = new Hand(true);
         playerHand = new Hand(false);
+        game = new Game();
         playerCash = 1000;
         boolean playing = true;
         while (playing) {
@@ -45,23 +49,6 @@ public class TextGame {
                 dealerTurn();
             }
             playing = newGame();
-        }
-    }
-    public static void betSelection() {
-        System.out.println("You have " + playerCash + "€ left. Type your betsize (1-" + playerCash + ").");
-        while (true) {            
-            temp = scanner.nextLine();
-            try {
-                betSize = Integer.parseInt(temp);
-                if (betSize < 0 || betSize > playerCash) {
-                    System.out.println("Please input a valid integer (1-" + playerCash + ").");
-                } else {
-                    System.out.println("You bet " + betSize + "€!");
-                    break;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Please input a valid integer (1-" + playerCash + ").");
-            }
         }
     }
     public static void baseDeal() {
@@ -83,8 +70,154 @@ public class TextGame {
         } else {
             playerBJ = 0;
         }
+    }*/
+    public TextGame() {
+        scanner = new Scanner(System.in);
+        game = new Game(1000);
+    }
+    public static void textGame() {
+        firstInit();
+        while(playing) {
+            betSelection();
+            baseDeal();
+            if (playerBJ == 0 || playerBJ == 3) {
+                playerTurn();
+            }
+            if (dealerHits) {
+                dealerTurn();
+            }
+            playing = newGame();
+        }
+    }
+    public static void firstInit() {
+        System.out.println("This is the text based game version.\nPress ENTER to start.");
+        temp = scanner.nextLine();
+        playing = true;
+    }
+    public static void betSelection() {
+        game.resetHand();
+        playerCash = game.getPlayerCash();
+        System.out.println("You have " + playerCash + "€ left. Type your betsize (1-" + playerCash + ").");
+        while (true) {            
+            temp = scanner.nextLine();
+            try {
+                betSize = Integer.parseInt(temp);
+                if (betSize < 0 || betSize > playerCash) {
+                    System.out.println("Please input a valid integer (1-" + playerCash + ").");
+                } else {
+                    System.out.println("You bet " + betSize + "€!");
+                    game.setBetSize(betSize);
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a valid integer (1-" + playerCash + ").");
+            }
+        }
+    }
+    public static void baseDeal() {
+        playerBJ = game.baseDeal();
+        if (playerBJ == 3) {
+            askInsurance();
+            dealerHits = true;
+        } else if (playerBJ == 2) {
+            System.out.println("You have BLACKJACK!");
+            System.out.println("You win " + betSize * 3 / 2 + "€.");
+            game.playerBlackjack();
+            dealerHits = false;
+        } else if (playerBJ == 1) {
+            askEvenMoney();
+        } else {
+            dealerHits = true;
+        }
+    }
+    private static void askInsurance() {
+        System.out.println("Would you like to buy insurance? YES or NO");
+        while (true) {
+            temp = scanner.nextLine();
+            if (temp.equals("NO")) {
+                System.out.println("No insurance.");
+                game.setInsurance(-1);
+                break;
+            } else if (temp.equals("YES")) {
+                System.out.println("Type insurance size (1-" + Math.min(betSize / 2, playerCash - betSize) + ")");
+                while (true) {
+                    temp = scanner.nextLine();
+                    try {
+                        int insSize = Integer.parseInt(temp);
+                        if (insSize < 1 || insSize > betSize / 2) {
+                            System.out.println("Please input a valid bet size.");
+                        } else if (insSize > playerCash - betSize) {
+                            System.out.println("Insufficient funds, please input a valid bet size.");
+                        } else {
+                            insurance = insSize;
+                            System.out.println("You have placed an insurance bet for " + insurance + "€.");
+                            game.setInsurance(insSize);
+                            break;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please input a valid integer (1-" + playerCash + ").");
+                    }
+                }
+                break;
+            } else {
+                System.out.println("Invalid input, please type YES or NO");
+            }
+        }
+    }
+    private static void askEvenMoney() {
+        System.out.println("You have BLACKJACK!\nWould you like to take even money? YES or NO");
+        while (true) {
+            temp = scanner.nextLine();
+            if (temp.equals("YES")) {
+                System.out.println("You have chosen to take even money");
+                game.playerWin();
+                dealerHits = false;
+            } else if (temp.equals("NO")) {
+                System.out.println("No even money");
+                dealerHits = true;
+                break;
+            } else {
+                System.out.println("Invalid input, please type YES or NO");
+            }
+        }
     }
     public static void playerTurn() {
+        moreCards = true;
+        System.out.println("Dealer has " + dealerHand.getValueString());
+        System.out.println("You have " + playerHand.getValueString());
+        System.out.println("Type HIT, STAND or DOUBLE");
+        String nextChoice = playerTurnInput(true);
+        //Handling the first choice
+        //Handling the rest of choices
+        //Method exit
+    }
+    public static String playerTurnInput(boolean canDouble) {
+        while(true) {
+            temp = scanner.nextLine();
+            if (temp.equals("DOUBLE")) {
+                if (canDouble) {
+                    if (playerCash > betSize * 2) {
+                        return "DOUBLE";
+                    } else {
+                        System.out.println("Insufficient funds to DOUBLE.\nplease choose HIT or STAND");
+                    }
+                } else {
+                    System.out.println("You can only DOUBLE after your first two cards.\nPlease choose HIT or STAND");
+                }
+            } else if (temp.equals("HIT")) {
+                return "HIT";
+            } else if (temp.equals("STAND")) {
+                return "STAND";
+            } else if (canDouble) {
+                System.out.println("Invalid input, please choose HIT, STAND or DOUBLE");
+            } else {
+                System.out.println("Invalid input, please choose HIT or STAND");
+            }
+        }
+    }
+    //Above new, below old
+    
+/*    public static void playerTurn() {
         moreCards = true;
         dealerHits = true;
         if (dealerHand.getValueString().equals("1/11")) {
@@ -104,7 +237,7 @@ public class TextGame {
                 System.out.println("Invalid input, please type HIT or STAND");
             }
         }
-    }
+    }*/
     public static void dealerTurn() {
         System.out.println("Dealer takes cards!");
         boolean dealerBJ = false;
@@ -202,38 +335,7 @@ public class TextGame {
         }
     }
 
-    private static void askInsurance() {
-        System.out.println("Would you like to buy insurance?");
-        while (true) {
-            temp = scanner.nextLine();
-            if (temp.equals("NO")) {
-                System.out.println("No insurance.");
-                break;
-            } else if (temp.equals("YES")) {
-                System.out.println("Type insurance bet size (1-" + Math.min(betSize / 2, playerCash - betSize) + ")");
-                while (true) {
-                    temp = scanner.nextLine();
-                    try {
-                        int insSize = Integer.parseInt(temp);
-                        if (insSize < 1 || insSize > betSize / 2) {
-                            System.out.println("Please input a valid bet size.");
-                        } else if (insSize > playerCash - betSize) {
-                            System.out.println("Insufficient funds, please input a valid bet size.");
-                        } else {
-                            insurance = insSize;
-                            System.out.println("You have placed an insurance bet for " + insurance + "€.");
-                            break;
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Please input a valid integer (1-" + playerCash + ").");
-                    }
-                }
-                break;
-            } else {
-                System.out.println("Please type YES or NO");
-            }
-        }
-    }
+    
 
     private static void winInsurance() {
         System.out.println("Insurance bet wins! You win " + insurance * 2 + "€.");
