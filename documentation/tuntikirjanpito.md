@@ -13,5 +13,6 @@
 |  6.4. | 1    | Hand-luokan testit |
 |  9.4. | 2    | Blackjack:n konsepti ja panostaminen |
 |       |      | Jar ja checkstyle |
+| 11.4. | 1    | Vakuutus |
 |       |      |  |
-|  Yht. | 15   |  |
+|  Yht. | 16   |  |
