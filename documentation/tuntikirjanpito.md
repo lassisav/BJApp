@@ -14,5 +14,5 @@
 |  9.4. | 2    | Blackjack:n konsepti ja panostaminen |
 |       |      | Jar ja checkstyle |
 | 11.4. | 1    | Vakuutus |
-|       |      |  |
-|  Yht. | 16   |  |
+|       | 1    | Game-luokan luonti |
+|  Yht. | 17   |  |
