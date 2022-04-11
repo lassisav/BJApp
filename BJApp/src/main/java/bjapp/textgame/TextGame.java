@@ -3,7 +3,7 @@
  * Game logic for modifying and comparing the dealer's and player's hands is in the Hand-class.
  * Game logic for moving from one phase of the game to another is in this class.
  * Known problems:
- * Game does not currently contain special actions (Double down, split, insurance, surrender). (Not yet implemented).
+ * Game does not currently contain certain special actions (Double down, split, surrender). (Not yet implemented).
  */
 package bjapp.textgame;
 
@@ -25,6 +25,7 @@ public class TextGame {
     static int playerCash;
     static int betSize;
     static int playerBJ; // 0 = no blackjack, 1 = blackjack, dealer 10 or Ace, 2 = blackjack, straight win
+    static int insurance;
     
     public static void textGame() {
         System.out.println("This is the text based game version.\nPress ENTER to start.");
@@ -65,6 +66,7 @@ public class TextGame {
     }
     public static void baseDeal() {
         dealerHits = true;
+        insurance = -1;
         playerHand.addRandomCard();
         dealerHand.addRandomCard();
         playerHand.addRandomCard();
@@ -85,6 +87,9 @@ public class TextGame {
     public static void playerTurn() {
         moreCards = true;
         dealerHits = true;
+        if (dealerHand.getValueString().equals("1/11")) {
+            askInsurance();
+        }
         while (moreCards) {                
             System.out.println("Dealer has " + dealerHand.getValueString());
             System.out.println("You have " + playerHand.getValueString());
@@ -115,10 +120,16 @@ public class TextGame {
                 } else {
                     System.out.println("Dealer wins! You lose " + betSize + "€!");
                     playerCash -= betSize;
+                    if (insurance != -1) {
+                        winInsurance();
+                    }
                 }
                 break;
             } else {
                 dealerBJ = false;
+                if (insurance != -1) {
+                    loseInsurance();
+                }
             }
             if (temp.endsWith("bust!")) {
                 System.out.println("Dealer has " + temp);
@@ -189,5 +200,48 @@ public class TextGame {
         } else {
             System.out.println("You have " + temp);
         }
+    }
+
+    private static void askInsurance() {
+        System.out.println("Would you like to buy insurance?");
+        while (true) {
+            temp = scanner.nextLine();
+            if (temp.equals("NO")) {
+                System.out.println("No insurance.");
+                break;
+            } else if (temp.equals("YES")) {
+                System.out.println("Type insurance bet size (1-" + Math.min(betSize / 2, playerCash - betSize) + ")");
+                while (true) {
+                    temp = scanner.nextLine();
+                    try {
+                        int insSize = Integer.parseInt(temp);
+                        if (insSize < 1 || insSize > betSize / 2) {
+                            System.out.println("Please input a valid bet size.");
+                        } else if (insSize > playerCash - betSize) {
+                            System.out.println("Insufficient funds, please input a valid bet size.");
+                        } else {
+                            insurance = insSize;
+                            System.out.println("You have placed an insurance bet for " + insurance + "€.");
+                            break;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please input a valid integer (1-" + playerCash + ").");
+                    }
+                }
+                break;
+            } else {
+                System.out.println("Please type YES or NO");
+            }
+        }
+    }
+
+    private static void winInsurance() {
+        System.out.println("Insurance bet wins! You win " + insurance * 2 + "€.");
+        playerCash += insurance * 2;
+    }
+
+    private static void loseInsurance() {
+        System.out.println("Insurance bet (" + insurance + "€) loses.");
+        playerCash -= insurance;
     }
 }
