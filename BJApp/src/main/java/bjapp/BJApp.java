@@ -14,6 +14,7 @@ import bjapp.textgame.TextGame;
 public class BJApp {
 
     public static void main(String[] args) {
-        TextGame.textGame();
+        TextGame textGame = new TextGame();
+        textGame.textGame();
     }
 }

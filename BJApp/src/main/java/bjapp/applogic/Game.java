@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author lassisav
+ * @author Lassi Savolainen, student, University of Helsinki
  */
 public class Game {
     Hand playerHand;
@@ -26,6 +26,8 @@ public class Game {
         this.playerCash = playerCash;
     }
     public void resetHand() {
+        playerHand.resetHand();
+        dealerHand.resetHand();
         dealerHits = true;
         insurance = -1;
         betSize = -1;
@@ -41,7 +43,7 @@ public class Game {
             } else {
                 playerBJ = 2;
             }
-        } else if(dealerHandString().equals("10") || dealerHandString().equals("1/11")) {
+        } else if (dealerHandString().equals("10") || dealerHandString().equals("1/11")) {
             playerBJ = 3;
         } else {
             playerBJ = 0;
@@ -57,6 +59,44 @@ public class Game {
         }
         return playerHandString();
     }
+    public int dealerAction() { //-2 = Dealer bust, -1 = Dealer stand, player win, 0 = Dealer stand, push, 1 = Dealer stand, player loss, 2 = Dealer BJ, player loss
+        if (dealerHandString().equals("1/11") || dealerHandString().equals("10")) {
+            dealerHand.addRandomCard();
+            if (dealerHandString().equals("11/21")) {
+                insuranceWin();
+                if (playerBJ == 1 || playerBJ == 2) {
+                    return 0;
+                } else {
+                    playerLoss();
+                    return 2;
+                }
+            }
+        }
+        insuranceLoss();
+        while (true) {
+            if (dealerHand.getValue() > 21) {
+                playerWin();
+                return -2;
+            } else if (dealerHand.getValue() > 16 || (dealerHand.hasAce() && dealerHand.getValue() > 6)) {
+                int result = dealerHand.dealerWinCheck(playerHand);
+                if (result == 1) {
+                    playerLoss();
+                } else if (result == -1) {
+                    playerWin();
+                }
+                return result;
+            }
+            dealerHand.addRandomCard();
+        }
+    }
+    public boolean bothBlackjackCheck() {
+        dealerHand.addRandomCard();
+        if (dealerHandString().equals("11/21")) {
+            return true;
+        }
+        playerBlackjack();
+        return false;
+    }
     public void playerBlackjack() {
         playerCash += (betSize * 3 / 2);
     }
@@ -65,6 +105,18 @@ public class Game {
     }
     public void playerLoss() {
         playerCash -= betSize;
+    }
+    public void insuranceLoss() {
+        if (insurance != -1) {
+            playerCash -= insurance;
+            System.out.println("You have lost your insurance bet (" + insurance + "€).");
+        }
+    }
+    public void insuranceWin() {
+        if (insurance != -1) {
+            playerCash += insurance * 2;
+            System.out.println("Your insurance bet wins (" + insurance * 2 + ")");
+        }
     }
     public String dealerHandString() {
         return dealerHand.getValueString();
@@ -84,5 +136,7 @@ public class Game {
     public void setInsurance(int insSize) {
         this.insurance = insSize;
     }
-    
+    public void addPlayerCash(int playerCash) {
+        this.playerCash += playerCash;
+    }
 }

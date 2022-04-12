@@ -87,4 +87,7 @@ public class Hand {
             return -1;
         }
     }
+    public boolean hasAce() {
+        return hasAce;
+    }
 }
