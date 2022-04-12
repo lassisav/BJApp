@@ -71,6 +71,7 @@ public class TextGame {
             playerBJ = 0;
         }
     }*/
+    // Above old below new
     public TextGame() {
         scanner = new Scanner(System.in);
         game = new Game(1000);
@@ -187,8 +188,24 @@ public class TextGame {
         System.out.println("You have " + playerHand.getValueString());
         System.out.println("Type HIT, STAND or DOUBLE");
         String nextChoice = playerTurnInput(true);
-        //Handling the first choice
-        //Handling the rest of choices
+        if (nextChoice.equals("DOUBLE")) {
+            playerDouble();
+        } else {
+            while(moreCards) {
+                if (nextChoice.equals("HIT")) {
+                    playerHit();
+                } else {
+                    moreCards = false;
+                    System.out.println("You choose to STAND!");
+                    break;
+                }
+                if (moreCards) {
+                    System.out.println("You have " + playerHand.getValueString());
+                    System.out.println("Type HIT or STAND");
+                    nextChoice = playerTurnInput(false);
+                }
+            }
+        }
         //Method exit
     }
     public static String playerTurnInput(boolean canDouble) {
@@ -213,6 +230,28 @@ public class TextGame {
             } else {
                 System.out.println("Invalid input, please choose HIT or STAND");
             }
+        }
+    }
+    public static void playerDouble() {
+        System.out.println("You choose to DOUBLE!");
+        temp = game.playerAction("DOUBLE");
+        System.out.println("You have " + temp);
+        if (temp.endsWith("bust!")) {
+            System.out.println("Dealer wins! You lose " + game.getBetSize() + "€!");
+            game.playerLoss();
+            dealerHits = false;
+            moreCards = false;
+        }
+    }
+    public static void playerHit() {
+        System.out.println("You choose to HIT!");
+        temp = game.playerAction("HIT");
+        System.out.println("You have " + temp);
+        if (temp.endsWith("bust!")) {
+            System.out.println("Dealer wins! You lose " + game.getBetSize() + "€!");
+            game.playerLoss();
+            dealerHits = false;
+            moreCards = false;
         }
     }
     //Above new, below old
@@ -321,19 +360,7 @@ public class TextGame {
             }
         }
     }
-    public static void playerHit() {
-        System.out.println("You choose to HIT!");
-        temp = playerHand.addRandomCard();
-        if (temp.endsWith("bust!")) {
-            System.out.println("You have " + temp);
-            System.out.println("Dealer wins! You lose " + betSize + "€!");
-            playerCash -= betSize;
-            dealerHits = false;
-            moreCards = false;
-        } else {
-            System.out.println("You have " + temp);
-        }
-    }
+    
 
     
 

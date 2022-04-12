@@ -48,11 +48,23 @@ public class Game {
         }
         return playerBJ;
     }
+    public String playerAction(String type) {
+        if (type.equals("DOUBLE")) {
+            betSize *= 2;
+        }
+        if (!type.equals("STAND")) {
+            playerHand.addRandomCard();
+        }
+        return playerHandString();
+    }
     public void playerBlackjack() {
         playerCash += (betSize * 3 / 2);
     }
     public void playerWin() {
         playerCash += betSize;
+    }
+    public void playerLoss() {
+        playerCash -= betSize;
     }
     public String dealerHandString() {
         return dealerHand.getValueString();
@@ -65,6 +77,9 @@ public class Game {
     }
     public void setBetSize(int betSize) {
         this.betSize = betSize;
+    }
+    public int getBetSize() {
+        return betSize;
     }
     public void setInsurance(int insSize) {
         this.insurance = insSize;
