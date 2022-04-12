@@ -8,11 +8,11 @@ Sovelluksessa pelataan Blackjack-kasinopeliä suomalaisten pelikasinoiden sään
 
 ## Dokumentaatio
 
-[Työaikakirjanpito](https://github.com/lassisav/BJApp/blob/main/documentation/tuntikirjanpito.md)
+[Työaikakirjanpito](https://github.com/lassisav/BJApp/blob/master/documentation/tuntikirjanpito.md)
 
-[Vaatimusmäärittely](https://github.com/lassisav/BJApp/blob/main/documentation/vaatimusmaarittely.md)
+[Vaatimusmäärittely](https://github.com/lassisav/BJApp/blob/master/documentation/vaatimusmaarittely.md)
 
-[Changelog](https://github.com/lassisav/BJApp/blob/main/documentation/changelog.md)
+[Changelog](https://github.com/lassisav/BJApp/blob/master/documentation/changelog.md)
 
 ## Komentorivitoiminnot
 
