@@ -12,6 +12,8 @@ Sovelluksessa pelataan Blackjack-kasinopeliä suomalaisten pelikasinoiden sään
 
 [Vaatimusmäärittely](https://github.com/lassisav/BJApp/blob/main/documentation/vaatimusmaarittely.md)
 
+[Changelog](https://github.com/lassisav/BJApp/blob/main/documentation/changelog.md)
+
 ## Komentorivitoiminnot
 
 ### Testaus
