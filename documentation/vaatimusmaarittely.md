@@ -6,7 +6,7 @@ Sovelluksessa pelataan [Blackjack](https://www.casinotampere.fi/pelit/blackjack)
 
 ## Käyttöliittymä
 
-Käyttäjä pelaa peliä graafisessa käyttöliittymässä.
+Käyttäjä pelaa peliä graafisessa käyttöliittymässä. NYKYINEN VERSIO TEKSTIKÄYTTÖLIITTYMÄSSÄ
 
 ## Toiminnalisuus
 
@@ -20,8 +20,8 @@ Käytännössä loputon pakka eroaa kivijalassa pelattavasta pelistä siten, ett
 ## Kehitys
 
 Pelin toiminnalisuuksia luodaan yksitellen.
-Ensimmäiseen versioon tulee pelaajalle vaihtoehdot joko ottaa lisäkortti tai jäädä.
-Tämän jälkeen sovellukseen lisätään panostus, sitten muut pelitoiminnot (tuplaus, jakaminen, luovutus, vakuutus), ja lopuksi bonuspelit.
+Ensimmäiseen versioon tulee pelaajalle vaihtoehdot joko ottaa lisäkortti tai jäädä. TEHTY
+Tämän jälkeen sovellukseen lisätään panostus, sitten muut pelitoiminnot (tuplaus, jakaminen, luovutus, vakuutus), ja lopuksi bonuspelit. TEHTY pl. jakaminen, luovutus ja bonuspelit
 
 ## Jatkokehitysideoita
 
