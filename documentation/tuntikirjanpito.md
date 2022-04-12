@@ -17,4 +17,5 @@
 |       | 1    | Game-luokan luonti |
 | 12.4. | 4    | Sovelluslogiikan siirtäminen TextGame:stä Gameen |
 |       |      | Dokumentaation päivitystä |
+|       |      | Pakkauskaavion luonti |
 |  Yht. | 21   |  |
