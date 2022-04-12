@@ -15,5 +15,6 @@
 |       |      | Jar ja checkstyle |
 | 11.4. | 1    | Vakuutus |
 |       | 1    | Game-luokan luonti |
-| 12.4. | 3    | Sovelluslogiikan siirtäminen TextGame:stä Gameen |
-|  Yht. | 20   |  |
+| 12.4. | 4    | Sovelluslogiikan siirtäminen TextGame:stä Gameen |
+|       |      | Dokumentaation päivitystä |
+|  Yht. | 21   |  |
