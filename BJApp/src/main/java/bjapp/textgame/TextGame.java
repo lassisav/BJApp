@@ -148,10 +148,12 @@ public class TextGame {
     }
     public void playerTurn() {
         moreCards = true;
-        System.out.println("Type HIT, STAND or DOUBLE");
+        System.out.println("Type HIT, STAND, DOUBLE or SURRENDER"); //SURRENDER not yet implemented
         String nextChoice = playerTurnInput(true);
         if (nextChoice.equals("DOUBLE")) {
             playerDouble();
+        } else if (nextChoice.equals("SURRENDER")) {
+            playerSurrender();
         } else {
             while (moreCards) {
                 if (nextChoice.equals("HIT")) {
@@ -182,12 +184,16 @@ public class TextGame {
                 } else {
                     System.out.println("You can only DOUBLE after your first two cards.\nPlease choose HIT or STAND");
                 }
+            } else if(temp.equals("SURRENDER")) {
+                if (canDouble) {
+                    return "SURRENDER";
+                }
             } else if (temp.equals("HIT")) {
                 return "HIT";
             } else if (temp.equals("STAND")) {
                 return "STAND";
             } else if (canDouble) {
-                System.out.println("Invalid input, please choose HIT, STAND or DOUBLE");
+                System.out.println("Invalid input, please choose HIT, STAND, DOUBLE or SURRENDER");
             } else {
                 System.out.println("Invalid input, please choose HIT or STAND");
             }
@@ -203,6 +209,13 @@ public class TextGame {
             dealerHits = false;
             moreCards = false;
         }
+    }
+    public void playerSurrender() {
+        System.out.println("You choose to SURRENDER");
+        int loss = game.playerSurrender();
+        System.out.println("You lose half of your bet. " + loss + "€");
+        dealerHits = false;
+        moreCards = false;
     }
     public void playerHit() {
         System.out.println("You choose to HIT!");

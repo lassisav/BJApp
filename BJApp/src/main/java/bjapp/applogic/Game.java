@@ -118,6 +118,10 @@ public class Game {
             System.out.println("Your insurance bet wins (" + insurance * 2 + ")");
         }
     }
+    public int playerSurrender() {
+        playerCash -= betSize/2;
+        return betSize/2;
+    }
     public String dealerHandString() {
         return dealerHand.getValueString();
     }
