@@ -3,7 +3,7 @@
  * Game logic for modifying and comparing the dealer's and player's hands is in the Hand-class.
  * Game logic for moving from one phase of the game to another is in this class.
  * Known problems:
- * Game does not currently contain certain special actions (Double down, split, surrender). (Not yet implemented).
+ * Game does not currently contain certain special actions (Double down, split). (Not yet implemented).
  */
 package bjapp.textgame;
 
@@ -148,7 +148,7 @@ public class TextGame {
     }
     public void playerTurn() {
         moreCards = true;
-        System.out.println("Type HIT, STAND, DOUBLE or SURRENDER"); //SURRENDER not yet implemented
+        System.out.println("Type HIT, STAND, DOUBLE or SURRENDER");
         String nextChoice = playerTurnInput(true);
         if (nextChoice.equals("DOUBLE")) {
             playerDouble();
@@ -187,6 +187,8 @@ public class TextGame {
             } else if(temp.equals("SURRENDER")) {
                 if (canDouble) {
                     return "SURRENDER";
+                } else {
+                    System.out.println("Invalid input, please choose HIT or STAND");
                 }
             } else if (temp.equals("HIT")) {
                 return "HIT";
@@ -208,6 +210,7 @@ public class TextGame {
             game.playerLoss();
             dealerHits = false;
             moreCards = false;
+            game.bustInsurance();
         }
     }
     public void playerSurrender() {
@@ -216,6 +219,7 @@ public class TextGame {
         System.out.println("You lose half of your bet. " + loss + "€");
         dealerHits = false;
         moreCards = false;
+        game.bustInsurance();
     }
     public void playerHit() {
         System.out.println("You choose to HIT!");
@@ -226,6 +230,7 @@ public class TextGame {
             game.playerLoss();
             dealerHits = false;
             moreCards = false;
+            game.bustInsurance();
         }
     }
     public void dealerTurn() {

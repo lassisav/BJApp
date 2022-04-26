@@ -97,6 +97,17 @@ public class Game {
         playerBlackjack();
         return false;
     }
+    public void bustInsurance() {
+        if (insurance != -1) {
+            dealerHand.addRandomCard();
+            if (dealerHand.getValueString().equals("11/21")) {
+                insuranceWin();
+            } else {
+                insuranceLoss();
+            }
+        }
+        
+    }
     public void playerBlackjack() {
         playerCash += (betSize * 3 / 2);
     }
