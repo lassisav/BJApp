@@ -3,7 +3,7 @@
  * Game logic for modifying and comparing the dealer's and player's hands is in the Hand-class.
  * Game logic for moving from one phase of the game to another is in this class.
  * Known problems:
- * Game does not currently contain certain special actions (Double down, split). (Not yet implemented).
+ * Game does not currently contain splitting. (Not yet implemented).
  */
 package bjapp.textgame;
 
