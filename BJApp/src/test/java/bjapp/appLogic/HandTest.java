@@ -42,18 +42,18 @@ public class HandTest {
     }
 
     @Test
-    public void firstCardCorrectNonAcePlayer(){
+    public void firstCardCorrectNonAcePlayerTest(){
         String value = playerHand.addCard(7);
         assertEquals("7", value);
     }
     
     @Test
-    public void firstCardCorrectAcePlayer(){
+    public void firstCardCorrectAcePlayerTest(){
         String value = playerHand.addCard(1);
         assertEquals("1/11", value);
     }
     @Test
-    public void firstCardCorrectNonAceDealer() {
+    public void firstCardCorrectNonAceDealerTest() {
         String value = dealerHand.addCard(9);
         assertEquals("9", value);
     }
@@ -120,7 +120,7 @@ public class HandTest {
         assertEquals(true, check);
     }
     @Test
-    public void dealerWinsSoftVSoft() {
+    public void dealerWinsSoftVSoftTest() {
         playerHand.addCard(7);
         playerHand.addCard(1);
         dealerHand.addCard(8);
@@ -129,7 +129,7 @@ public class HandTest {
         assertEquals(1, check);
     }
     @Test
-    public void playerWinsNoAceVNoAce() {
+    public void playerWinsNoAceVNoAceTest() {
         playerHand.addCard(10);
         playerHand.addCard(10);
         dealerHand.addCard(9);
@@ -138,7 +138,7 @@ public class HandTest {
         assertEquals(-1, check);
     }
     @Test
-    public void pushHardvHard() {
+    public void pushHardvHardTest() {
         playerHand.addCard(1);
         playerHand.addCard(3);
         playerHand.addCard(5);
@@ -146,5 +146,25 @@ public class HandTest {
         dealerHand.addCard(8);
         int check = dealerHand.dealerWinCheck(playerHand);
         assertEquals(0, check);
+    }
+    @Test
+    public void randomCardsAreValidTest() {
+        boolean validity = true;
+        boolean[] eachValue = new boolean[11];
+        for (int i = 0; i < 1000; i++) {
+            playerHand.addRandomCard();
+            if (playerHand.getValue() < 1 || playerHand.getValue() > 10) {
+                validity = false;
+            } else {
+                eachValue[playerHand.getValue()] = true;
+            }
+            playerHand.resetHand();
+        }
+        for (int i = 1; i < 11; i++) {
+            if (eachValue[i] == false) {
+                validity = false;
+            }
+        }
+        assertEquals(validity, true);
     }
 }
