@@ -42,7 +42,13 @@ Komento
 mvn package
 ```
 
-generoi hakemistoon _target_ suoritettavan jar-tiedoston _BJApp-1.0-SNAPSHOT.jar_
+generoi hakemistoon _target_ suoritettavan jar-tiedoston _BJApp-1.0-SNAPSHOT.jar_.
+
+Tämän jälkeen ohjelman voi suorittaa komennolla 
+
+```
+java -jar target/BJApp-1.0-SNAPSHOT.jar
+```
 
 ### Checkstyle
 
