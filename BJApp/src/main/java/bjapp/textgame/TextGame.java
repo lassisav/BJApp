@@ -184,7 +184,7 @@ public class TextGame {
                 } else {
                     System.out.println("You can only DOUBLE after your first two cards.\nPlease choose HIT or STAND");
                 }
-            } else if(temp.equals("SURRENDER")) {
+            } else if (temp.equals("SURRENDER")) {
                 if (canDouble) {
                     return "SURRENDER";
                 } else {

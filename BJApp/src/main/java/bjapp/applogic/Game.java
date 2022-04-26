@@ -130,8 +130,8 @@ public class Game {
         }
     }
     public int playerSurrender() {
-        playerCash -= betSize/2;
-        return betSize/2;
+        playerCash -= betSize / 2;
+        return betSize / 2;
     }
     public String dealerHandString() {
         return dealerHand.getValueString();
