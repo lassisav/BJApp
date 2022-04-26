@@ -49,20 +49,20 @@ public class TextGame {
     }
     public void betSelection() {
         game.resetHand();
-        System.out.println("You have " + game.getPlayerCash() + "€ left. Type your betsize (1-" + game.getPlayerCash() + ").");
+        System.out.println("You have " + game.getPlayerCash() + "€ left. Type your betsize (10-" + (game.getPlayerCash() / 10) * 10 + ").");
         while (true) {            
             temp = scanner.nextLine();
             try {
                 int betSize = Integer.parseInt(temp);
-                if (betSize < 0 || betSize > game.getPlayerCash()) {
-                    System.out.println("Please input a valid integer (1-" + game.getPlayerCash() + ").");
+                if (betSize < 0 || betSize > game.getPlayerCash() || betSize % 10 != 0) {
+                    System.out.println("Please input a valid integer (10-" + (game.getPlayerCash() / 10) * 10 + ").");
                 } else {
                     System.out.println("You bet " + betSize + "€!");
                     game.setBetSize(betSize);
                     break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Please input a valid integer (1-" + game.getPlayerCash() + ").");
+                System.out.println("Please input a valid integer (10-" + (game.getPlayerCash() / 10) * 10 + ").");
             }
         }
     }
@@ -250,7 +250,7 @@ public class TextGame {
     }
     public boolean newGame() {
         System.out.println("You have " + game.getPlayerCash() + "€ left.");
-        if (game.getPlayerCash() == 0) {
+        if (game.getPlayerCash() < 10) {
             return outOfMoney();
         }
         System.out.println("Type QUIT to quit playing, or NEW to play a new game.");
