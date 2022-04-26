@@ -18,4 +18,12 @@
 | 12.4. | 4    | Sovelluslogiikan siirtäminen TextGame:stä Gameen |
 |       |      | Dokumentaation päivitystä |
 |       |      | Pakkauskaavion luonti |
-|  Yht. | 21   |  |
+| 21.4. | 2    | Luovutuksen lisääminen |
+| 25.4. | 1    | Vakuutuksen parantelua |
+|       | 1    | Game-luokan ensimmäiset testit |
+|       |      | Hand-luokan viimeiset testit |
+| 26.4. | 2    | Tyylin korjaus, checkstylen määrittelyn korjaus |
+|       |      | Panostuksen säännönmukaistus tekstikäyttöliittymässä |
+|       |      | Dokumentaation päivitys |
+|       |      | Github-release |
+|  Yht. | 27   |  |
