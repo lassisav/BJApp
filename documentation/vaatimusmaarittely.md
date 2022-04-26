@@ -10,9 +10,11 @@ Käyttäjä pelaa peliä graafisessa käyttöliittymässä. NYKYINEN VERSIO TEKS
 
 ## Toiminnalisuus
 
-Perustoiminnallisuutena on yksittäisen Blackjack -kierroksen pelaaminen. Kierrosten välissä käyttäjä voi muuttaa panoskokoja tai kassassa olevan rahan määrää.
-Kierros alka perusjaolla, joka määrittää kierroksen lähtötilanteen ja bonuspelien tuloksen.
-Kierroksen aikana eri vaiheissa käyttäjä päättää ottaako hän lisäkortin vai ei, tuplaako, jakaako, vakuuttaako tai luovuttaako.
+Perustoiminnallisuutena on yksittäisen Blackjack -kierroksen pelaaminen. Kierrosten välissä käyttäjä voi muuttaa panoskokoja tai kassassa olevan rahan määrää. TEHTY, PL. KASSAN MUOKKAUS KUN KASSASSA ON TARPEEKSI RAHAA PELATA
+
+Kierros alka perusjaolla, joka määrittää kierroksen lähtötilanteen ja bonuspelien tuloksen. TEHTY
+
+Kierroksen aikana eri vaiheissa käyttäjä päättää ottaako hän lisäkortin vai ei, tuplaako, jakaako, vakuuttaako tai luovuttaako. TEHTY, PL. KÄDEN JAKAMINEN
 
 Sovelluksen pelin säännöt ovat lopullisessa sovelluksessa muuten samat kuin Helsingin ja Tampereen kasinoilla, paitsi että peliä pelataan ns. loputtomalla pakalla, missä jokaista korttia on ääretön määrä.
 Käytännössä loputon pakka eroaa kivijalassa pelattavasta pelistä siten, että seuraavan kortin arvojen todennäköisyydet ovat samat riippumatta aiemmin peliin tulleista korteista.
@@ -21,7 +23,7 @@ Käytännössä loputon pakka eroaa kivijalassa pelattavasta pelistä siten, ett
 
 Pelin toiminnalisuuksia luodaan yksitellen.
 Ensimmäiseen versioon tulee pelaajalle vaihtoehdot joko ottaa lisäkortti tai jäädä. TEHTY
-Tämän jälkeen sovellukseen lisätään panostus, sitten muut pelitoiminnot (tuplaus, jakaminen, luovutus, vakuutus), ja lopuksi bonuspelit. TEHTY pl. jakaminen, luovutus ja bonuspelit
+Tämän jälkeen sovellukseen lisätään panostus, sitten muut pelitoiminnot (tuplaus, jakaminen, luovutus, vakuutus), ja lopuksi bonuspelit. TEHTY PL. JAKAMINEN JA BONUSPELIT
 
 ## Jatkokehitysideoita
 
