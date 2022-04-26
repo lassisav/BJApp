@@ -12,3 +12,8 @@
  - Pelissä voi vakuuttaa jakajan Blackjackiä vastaan.
  - Pelissä voi tuplata.
  - Sovelluslogiikan toteuttava koodi on eriytetty tekstikäyttöliittymän toteuttavasta koodista.
+
+## Viikko 5
+
+ - Pelissä voi luovuttaa.
+ - Pelin panostaso valitaan 10€ välein.
