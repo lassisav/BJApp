@@ -17,3 +17,7 @@
 
  - Pelissä voi luovuttaa.
  - Pelin panostaso valitaan 10€ välein.
+
+## Viikko 6
+
+ - Ei muutoksia sovelluksen toimintaan.

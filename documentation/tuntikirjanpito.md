@@ -26,4 +26,5 @@
 |       |      | Panostuksen säännönmukaistus tekstikäyttöliittymässä |
 |       |      | Dokumentaation päivitys |
 |       |      | Github-release |
-|  Yht. | 27   |  |
+|  3.5. | 2    | Testejä Game-luokkaan |
+|  Yht. | 29   |  |
