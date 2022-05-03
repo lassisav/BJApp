@@ -154,4 +154,10 @@ public class Game {
     public void addPlayerCash(int playerCash) {
         this.playerCash += playerCash;
     }
+    public void addPlayerCard(int value) { //For testing purposes only
+        playerHand.addCard(value);
+    }
+    public void addDealerCard(int value) { //For testing purposes only
+        dealerHand.addCard(value);
+    }
 }
