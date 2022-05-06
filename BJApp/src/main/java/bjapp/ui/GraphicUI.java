@@ -9,11 +9,13 @@ package bjapp.ui;
  * @author lassisav
  */
 
+import bjapp.applogic.Game;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -21,6 +23,7 @@ import javafx.stage.Stage;
 public class GraphicUI extends Application {
     
     Stage window;
+    Game game;
     
     public static void main(String[] args) {
         launch(args);
@@ -29,11 +32,11 @@ public class GraphicUI extends Application {
     @Override
     public void start(Stage stage) {
         window = stage;
-        
-        launch();
+        game = new Game(1000);
+        launchUI();
     }
     
-    public void launch() {
+    public void launchUI() {
         Button quitGame = new Button("QUIT");
         Button startRound = new Button("NEW GAME");
         
@@ -41,7 +44,7 @@ public class GraphicUI extends Application {
             System.exit(0);
         });
         startRound.setOnAction((ActionEvent e) -> {
-            roundStart();
+            startRound();
         });
         
         HBox welcomeMessage = new HBox();
@@ -61,24 +64,71 @@ public class GraphicUI extends Application {
         window.setTitle("This is a blackjack application!");
         window.show();
     }
-    public void roundStart() {
+    public void startRound() {
+        TextField inputBetSize = new TextField();
+        Button setBetSize = new Button("ENTER");
+        Label errorMsg = new Label("");
+        
         HBox infoRow = new HBox();
-        infoRow.getChildren().add(new Label("Cash: 1000"));
+        infoRow.getChildren().add(new Label("Cash: " + game.getPlayerCash()));
         infoRow.getChildren().add(new Label("    "));
-        infoRow.getChildren().add(new Label("Bet: 10"));
+        infoRow.getChildren().add(new Label("Choose your betsize! (10-" + Math.min(500, (game.getPlayerCash() / 10) * 10) + ")"));
+        
+        HBox selection = new HBox();
+        selection.getChildren().add(inputBetSize);
+        selection.getChildren().add(setBetSize);
+        
+        VBox startRoundComponents = new VBox();
+        startRoundComponents.getChildren().add(infoRow);
+        startRoundComponents.getChildren().add(selection);
+        startRoundComponents.getChildren().add(errorMsg);
+        
+        Scene scene = new Scene(startRoundComponents, 1600, 1000);
+        
+        setBetSize.setOnAction((ActionEvent e) -> {
+            int input = Integer.parseInt(inputBetSize.getText());
+            if (input % 10 == 0 && input <= game.getPlayerCash() && input <= 500) {
+                game.setBetSize(input);
+                playRound();
+            } else {
+                errorMsg.setText("Invalid input, please input a valid betsize.");
+            }
+        });
+        
+        window.setScene(scene);
+        window.setTitle("This is a blackjack application!");
+        window.show();
+    }
+    public void playRound() {
+        int BJStatus = game.baseDeal();
+        
+        Label playerHand = new Label("Player hand: " + game.playerHandString());
+        Label dealerHand = new Label("Dealer hand: " + game.dealerHandString());
+        Button hitButton = new Button("HIT");
+        Button standButton = new Button("STAND");
+        
+        HBox infoRow = new HBox();
+        infoRow.getChildren().add(new Label("Cash: " + game.getPlayerCash()));
+        infoRow.getChildren().add(new Label("    "));
+        infoRow.getChildren().add(new Label("Bet: " + game.getBetSize()));
         
         HBox dealerRow = new HBox();
-        dealerRow.getChildren().add(new Label("Dealer cards:  "));
+        dealerRow.getChildren().add(dealerHand);
         
         HBox playerRow = new HBox();
-        playerRow.getChildren().add(new Label("Player cards:  "));
+        playerRow.getChildren().add(playerHand);
         
-        VBox roundStartComponents = new VBox();
-        roundStartComponents.getChildren().add(infoRow);
-        roundStartComponents.getChildren().add(dealerRow);
-        roundStartComponents.getChildren().add(playerRow);
+        HBox buttonRow = new HBox();
+        buttonRow.getChildren().add(hitButton);
+        buttonRow.getChildren().add(standButton);
         
-        Scene scene = new Scene(roundStartComponents, 1600, 1000);
+        VBox playRoundComponents = new VBox();
+        playRoundComponents.getChildren().add(infoRow);
+        playRoundComponents.getChildren().add(dealerRow);
+        playRoundComponents.getChildren().add(playerRow);
+        playRoundComponents.getChildren().add(buttonRow);
+        
+        Scene scene = new Scene(playRoundComponents, 1600, 1000);
         
         window.setScene(scene);
         window.setTitle("This is a blackjack application!");
