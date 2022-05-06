@@ -5,7 +5,7 @@
  * Known problems:
  * Game does not currently contain splitting. (Not yet implemented).
  */
-package bjapp.textgame;
+package bjapp.ui;
 
 import bjapp.applogic.Game;
 import java.util.Scanner;
