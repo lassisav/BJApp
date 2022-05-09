@@ -210,7 +210,7 @@ public class TextGame {
             game.playerLoss();
             dealerHits = false;
             moreCards = false;
-            game.bustInsurance();
+            game.bustOrSurrenderInsurance();
         }
     }
     public void playerSurrender() {
@@ -219,7 +219,7 @@ public class TextGame {
         System.out.println("You lose half of your bet. " + loss + "€");
         dealerHits = false;
         moreCards = false;
-        game.bustInsurance();
+        game.bustOrSurrenderInsurance();
     }
     public void playerHit() {
         System.out.println("You choose to HIT!");
@@ -230,7 +230,7 @@ public class TextGame {
             game.playerLoss();
             dealerHits = false;
             moreCards = false;
-            game.bustInsurance();
+            game.bustOrSurrenderInsurance();
         }
     }
     public void dealerTurn() {
