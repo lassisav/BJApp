@@ -43,7 +43,7 @@ public class Game {
             } else {
                 playerBJ = 2;
             }
-        } else if (dealerHandString().equals("10") || dealerHandString().equals("1/11")) {
+        } else if (dealerHandString().equals("1/11")) {
             playerBJ = 3;
         } else {
             playerBJ = 0;
