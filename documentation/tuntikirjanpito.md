@@ -27,4 +27,7 @@
 |       |      | Dokumentaation päivitys |
 |       |      | Github-release |
 |  3.5. | 2    | Testejä Game-luokkaan |
-|  Yht. | 29   |  |
+|  6.5. | 3    | JavaFX:n mieleenpalautusta |
+|       |      | Graafisen käyttöliittymän pohja |
+|  9.5. | 3    | Pelin toiminnallisuudet graafiseen käyttöliittymään |
+|  Yht. | 35   |  |
