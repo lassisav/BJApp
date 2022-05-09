@@ -97,16 +97,18 @@ public class Game {
         playerBlackjack();
         return false;
     }
-    public void bustInsurance() {
+    public int bustOrSurrenderInsurance() {
         if (insurance != -1) {
             dealerHand.addRandomCard();
             if (dealerHand.getValueString().equals("11/21")) {
                 insuranceWin();
+                return 1;
             } else {
                 insuranceLoss();
+                return -1;
             }
         }
-        
+        return 0;
     }
     public void playerBlackjack() {
         playerCash += (betSize * 3 / 2);
@@ -151,6 +153,9 @@ public class Game {
     public void setInsurance(int insSize) {
         this.insurance = insSize;
     }
+    public int getInsurance() {
+        return insurance;
+    }
     public void addPlayerCash(int playerCash) {
         this.playerCash += playerCash;
     }
@@ -159,5 +164,8 @@ public class Game {
     }
     public void addDealerCard(int value) { //For testing purposes only
         dealerHand.addCard(value);
+    }
+    public boolean isBust() {
+        return playerHand.getValue() > 21;
     }
 }
