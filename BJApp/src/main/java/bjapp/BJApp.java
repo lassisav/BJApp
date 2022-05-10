@@ -6,7 +6,6 @@
 package bjapp;
 
 import bjapp.ui.GraphicUI;
-import bjapp.ui.TextGame;
 
 /**
  *
@@ -16,7 +15,5 @@ public class BJApp {
 
     public static void main(String[] args) {
         GraphicUI.main(args);
-        //TextGame textGame = new TextGame();
-        //textGame.textGame();
     }
 }
