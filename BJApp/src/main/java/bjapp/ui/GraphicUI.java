@@ -437,7 +437,7 @@ public class GraphicUI extends Application {
         } else if (result == 1) {
             resultLabel.setText("Dealer stands! Player loses " + game.getBetSize() + "!");
             if (insurance) {
-                insuranceLabel.setText("Insurance(" + game.getInsurance() + ") loses!");
+                insuranceLabel.setText("Insurance (" + game.getInsurance() + ") loses!");
             }
         } else if (result == 2) {
             resultLabel.setText("Dealer blackjack! Player loses " + game.getBetSize() + "!");
@@ -485,8 +485,10 @@ public class GraphicUI extends Application {
         HBox buttonRow = new HBox();
         Button quitButton = new Button("QUIT");
         Button newGameButton = new Button("NEW GAME");
+        Button addFundsButton = new Button("ADD FUNDS");
         buttonRow.getChildren().add(quitButton);
         buttonRow.getChildren().add(newGameButton);
+        buttonRow.getChildren().add(addFundsButton);
         
         quitButton.setOnAction((ActionEvent e) -> {
             System.exit(0);
@@ -495,12 +497,50 @@ public class GraphicUI extends Application {
             game.resetHand();
             startRound();
         });
+        addFundsButton.setOnAction((ActionEvent e)->{
+            addFunds();
+        });
         
         VBox QOCComponents = new VBox();
         QOCComponents.getChildren().add(new Label("Cash: " + game.getPlayerCash()));
         QOCComponents.getChildren().add(buttonRow);
         
         Scene scene = new Scene(QOCComponents, 1600, 1000);
+        
+        window.setScene(scene);
+        window.setTitle("This is a blackjack application!");
+        window.show();
+    }
+    public void addFunds() {
+        TextField inputFunds = new TextField();
+        Button addFundsButton = new Button("ADD FUNDS");
+        Label errorMsg = new Label("");
+        
+        HBox buttonRow = new HBox();
+        buttonRow.getChildren().add(inputFunds);
+        buttonRow.getChildren().add(addFundsButton);
+        
+        VBox addFundsComponents = new VBox();
+        
+        addFundsComponents.getChildren().add(new Label("Cash: " + game.getPlayerCash()));
+        addFundsComponents.getChildren().add(buttonRow);
+        
+        addFundsButton.setOnAction((ActionEvent e)->{
+            try {
+                int input = Integer.parseInt(inputFunds.getText());
+                if (input > 0 ) {
+                    game.addPlayerCash(input);
+                    quitOrContinue();
+                } else {
+                    errorMsg.setText("Invalid input, please input a valid cash sum.");
+                } 
+            } catch (NumberFormatException ex) {
+                errorMsg.setText("Invalid input, please input a valid cash sum.");
+            }
+            
+        });
+        
+        Scene scene = new Scene(addFundsComponents, 1600, 1000);
         
         window.setScene(scene);
         window.setTitle("This is a blackjack application!");
