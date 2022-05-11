@@ -23,14 +23,6 @@ public class HandTest {
     public HandTest() {
     }
     
-/*  @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-*/    
     @Before
     public void setUp() {
         playerHand = new Hand(false);
@@ -166,5 +158,15 @@ public class HandTest {
             }
         }
         assertEquals(validity, true);
+    }
+    @Test
+    public void hasAceWithAceTest(){
+        playerHand.addCard(1);
+        assertEquals(playerHand.hasAce(), true);
+    }
+    @Test
+    public void hasAceWithoutAceTest(){
+        playerHand.addCard(7);
+        assertEquals(playerHand.hasAce(), false);
     }
 }
