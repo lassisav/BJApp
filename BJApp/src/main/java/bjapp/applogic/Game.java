@@ -64,7 +64,7 @@ public class Game {
             dealerHand.addRandomCard();
             if (dealerHandString().equals("11/21")) {
                 insuranceWin();
-                if (playerBJ == 1 || playerBJ == 2) {
+                if (playerBJ == 1) {
                     return 0;
                 } else {
                     playerLoss();
@@ -159,11 +159,26 @@ public class Game {
     }
     public void addPlayerCard(int value) { //For testing purposes only
         playerHand.addCard(value);
+        if (value == 1) {
+            dealerHand.hasAce = true;
+        }
     }
     public void addDealerCard(int value) { //For testing purposes only
         dealerHand.addCard(value);
+        if (value == 1) {
+            dealerHand.hasAce = true;
+        }
     }
     public boolean isBust() {
         return playerHand.getValue() > 21;
+    }
+    public int getDealerHandValue() { //For testing purposes only
+        return dealerHand.value;
+    }
+    public int getPlayerHandValue() { //For testing purposes only
+        return playerHand.value;
+    }
+    public void setPlayerBJ(int x) { //For testing purposes only
+        playerBJ = x;
     }
 }
