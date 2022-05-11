@@ -108,10 +108,12 @@ public class GameTest {
             if (temp == true) {
                 if (!game.dealerHandString().equals("11/21")) {
                     System.out.println("bothBlackjackCheck incorrectly returns true");
+                    correct = false;
                 }
             } else {
                 if (game.dealerHandString().equals("11/21")) {
                     System.out.println("bothBlackjackCheck incorrectly returns false");
+                    correct = false;
                 }
             }
             game.resetHand();
