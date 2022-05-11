@@ -61,7 +61,7 @@ public class GameTest {
                     System.out.println("baseDeal incorrectly returns 3");
                 }
             } else if (temp == 0) {
-                if (baseDealPlayerBJ() || baseDealDealerBJPossible()) {
+                if (baseDealPlayerBJ() || game.dealerHandString().equals("1/11")) {
                     correct = false;
                     System.out.println("baseDeal incorrectly returns 0");
                 }
@@ -131,11 +131,66 @@ public class GameTest {
     public void playerBlackjackTest() {
         game.setBetSize(10);
         game.playerBlackjack();
-        assertEquals(game.getPlayerCash(), 1015);
+        assertEquals(1015, game.getPlayerCash());
     }
     @Test
     public void addPlayerCashTest() {
         game.addPlayerCash(1000);
-        assertEquals(game.getPlayerCash(), 2000);
+        assertEquals(2000, game.getPlayerCash());
+    }
+    @Test
+    public void playerWinTest() {
+        game.setBetSize(100);
+        game.playerWin();
+        assertEquals(1100, game.getPlayerCash());
+    }
+    @Test
+    public void playerLossTest() {
+        game.setBetSize(200);
+        game.playerLoss();
+        assertEquals(800, game.getPlayerCash());
+    }
+    @Test
+    public void playerSurrenderTest() {
+        game.setBetSize(500);
+        game.playerSurrender();
+        assertEquals(750, game.getPlayerCash());
+    }
+    @Test
+    public void isBustWhenBustTest() {
+        game.addPlayerCard(10);
+        game.addPlayerCard(6);
+        game.addPlayerCard(9);
+        assertEquals(true, game.isBust());
+    }
+    @Test
+    public void isBustWhenNotBustTest() {
+        game.addPlayerCard(10);
+        game.addPlayerCard(5);
+        assertEquals(false, game.isBust());
+    }
+    @Test
+    public void insuranceLossWithInsuranceTest() {
+        game.setInsurance(20);
+        game.insuranceLoss();
+        assertEquals(980, game.getPlayerCash());
+    }
+    @Test
+    public void insuranceLossWithoutInsuranceTest() {
+        game.setInsurance(-1);
+        game.insuranceLoss();
+        assertEquals(1000, game.getPlayerCash());
+    }
+    @Test
+    public void insuranceWinWithInsuranceTest() {
+        game.setInsurance(100);
+        game.insuranceWin();
+        assertEquals(1200, game.getPlayerCash());
+    }
+    @Test
+    public void insuranceWinWithoutInsuranceTest() {
+        game.setInsurance(-1);
+        game.insuranceWin();
+        assertEquals(1000, game.getPlayerCash());
     }
 }
