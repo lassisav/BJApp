@@ -122,13 +122,11 @@ public class Game {
     public void insuranceLoss() {
         if (insurance != -1) {
             playerCash -= insurance;
-            System.out.println("You have lost your insurance bet (" + insurance + "€).");
         }
     }
     public void insuranceWin() {
         if (insurance != -1) {
             playerCash += insurance * 2;
-            System.out.println("Your insurance bet wins (" + insurance * 2 + ")");
         }
     }
     public int playerSurrender() {

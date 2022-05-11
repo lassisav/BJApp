@@ -22,16 +22,8 @@ public class Hand {
         hasAce = false;
     }
     public String addCard(int card) {
-        if (isDealer) {
-            System.out.print("Dealer draws ");
-        } else {
-            System.out.print("You draw ");
-        }
         if (card == 1) {
             hasAce = true;
-            System.out.println("Ace");
-        } else {
-            System.out.println(card);
         }
         value += card;
         return getValueString();
@@ -77,8 +69,6 @@ public class Hand {
         if (playerHand.hasAce && playerTrue < 12) {
             playerTrue += 10;
         }
-        System.out.println("Dealer has " + dealerTrue + "!");
-        System.out.println("You have " + playerTrue + "!");
         if (dealerTrue == playerTrue) {
             return 0;
         } else if (dealerTrue > playerTrue) {
