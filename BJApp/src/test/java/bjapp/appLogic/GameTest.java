@@ -193,4 +193,73 @@ public class GameTest {
         game.insuranceWin();
         assertEquals(1000, game.getPlayerCash());
     }
+    @Test
+    public void dealerActionTest1(){
+        assertEquals(true, dealerActionFunction(10));
+    }
+    @Test
+    public void dealerActionTest2() {
+        assertEquals(true, dealerActionFunction(3));
+    }
+    @Test
+    public void dealerActionTest3() {
+        assertEquals(true, dealerActionFunction(1));
+    }
+    @Test
+    public void dealerActionPlayerBJTest() {
+        boolean correct = true;
+        for (int i = 0; i < 1000; i++) {
+            game.resetHand();
+            game.addPlayerCard(10);
+            game.addPlayerCard(1);
+            game.addDealerCard(10);
+            game.setPlayerBJ(1);
+            int result = game.dealerAction();
+            if (result == 0 && !game.dealerHandString().equals("11/21")) {
+                System.out.println("dealerAction incorrectly returns 0, dealerHandString: " + game.dealerHandString());
+                correct = false;
+            } else if (result != 0 && game.dealerHandString().equals("11/21")) {
+                System.out.println("dealerAction doesn't return 0 on a dealer push");
+                correct = false;
+            }
+        }
+        assertEquals(true, correct);
+    }
+    public boolean dealerActionFunction(int dealerC) {
+        boolean correct = true;
+        for (int i = 0; i < 1000; i++) {
+            game.resetHand();
+            game.addPlayerCard(10);
+            game.addPlayerCard(8);
+            game.addDealerCard(dealerC);
+            int result = game.dealerAction();
+            if (result == -2) {
+                if (game.getDealerHandValue() < 22) {
+                    System.out.println("dealerAction incorrectly returns -2");
+                    correct = false;
+                }
+            } else if (result == -1) {
+                if (game.getDealerHandValue() > 17) {
+                    System.out.println("dealerAction incorrectly returns -1");
+                    correct = false;
+                }
+            } else if (result == 0) {
+                if (!(game.getDealerHandValue() == 18 || game.getDealerHandValue() == 8 && game.dealerHandString().contains("/"))) {
+                    System.out.println("dealerAction incorrectly returns 0");
+                    correct = false;
+                }
+            } else if (result == 1) {
+                if (!(game.getDealerHandValue() > 18 || (game.getDealerHandValue() > 8 && game.dealerHandString().contains("/")))) {
+                    System.out.println("dealerAction incorrectly returns 1");
+                    correct = false;
+                }
+            } else if (result == 2) {
+                if (!game.dealerHandString().equals("11/21")) {
+                    System.out.println("dealerAction incorrectly returns 2");
+                    correct = false;
+                }
+            }
+        }
+        return correct;
+    }
 }
