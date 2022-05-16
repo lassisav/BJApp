@@ -57,7 +57,7 @@ generoi hakemistoon _target_ suoritettavan jar-tiedoston _BJApp-FINAL.jar_.
 Tämän jälkeen ohjelman voi suorittaa komennolla 
 
 ```
-java -jar target/BJApp-1.0-SNAPSHOT.jar
+java -jar target/BJApp-FINAL.jar
 ```
 
 ### Checkstyle
