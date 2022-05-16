@@ -30,4 +30,11 @@
 |  6.5. | 3    | JavaFX:n mieleenpalautusta |
 |       |      | Graafisen käyttöliittymän pohja |
 |  9.5. | 3    | Pelin toiminnallisuudet graafiseen käyttöliittymään |
-|  Yht. | 35   |  |
+| 10.5. | 1    | Rahan lisäys kassaan |
+| 11.5. | 3    | Viimeiset testit |
+|       |      | Konsolitulostusten poisto sovelluslogiikasta |
+| 16.5. | 2    | Käyttöohje |
+|       |      | Sovelluksen järjestelmätestausta |
+|       |      | Dokumentaation päivitys lopullista julkaisua varten |
+|       |      | Lopullinen julkaisu |
+|  Yht. | 41   |  |
