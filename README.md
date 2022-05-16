@@ -16,7 +16,17 @@ Sovelluksessa pelataan Blackjack-kasinopeliä suomalaisten pelikasinoiden sään
 
 [Arkkitehtuuri](https://github.com/lassisav/BJApp/blob/master/documentation/arkkitehtuuri.md)
 
+[Käyttö-ohje](https://github.com/lassisav/BJApp/blob/master/documentation/kayttoohje.md)
+
+## Releaset
+
+[Viikko 5](https://github.com/lassisav/BJApp/releases/tag/viikko5)
+
+[Viikko 7](https://github.com/lassisav/BJApp/releases/tag/viikko7)
+
 ## Komentorivitoiminnot
+
+Komennot tulee suorittaa kansiossa BJApp.
 
 ### Testaus
 
@@ -42,7 +52,7 @@ Komento
 mvn package
 ```
 
-generoi hakemistoon _target_ suoritettavan jar-tiedoston _BJApp-1.0-SNAPSHOT.jar_.
+generoi hakemistoon _target_ suoritettavan jar-tiedoston _BJApp-FINAL.jar_.
 
 Tämän jälkeen ohjelman voi suorittaa komennolla 
 
